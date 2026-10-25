@@ -1,0 +1,5 @@
+# Every change needs a review from one of these before it merges (branch protection:
+# "Require review from Code Owners"). Add trusted contributors to the first line.
+*            @ludovic111 @rdbtCVS @levzzz5154 @socksprox
+/.github/    @ludovic111
+/revoked.toml @ludovic111

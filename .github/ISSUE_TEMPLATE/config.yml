@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Submit a project
+    url: https://playhorizon.dev/mods/submit
+    about: Mods, modpacks and resource packs for Horizon. Each submission is reviewed.
+  - name: Horizon itself
+    url: https://github.com/ludovic111/horizon/issues
+    about: Bugs in the game or the launcher.

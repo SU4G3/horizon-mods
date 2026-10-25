@@ -1,0 +1,65 @@
+# Merging publishes: each new version's file becomes a release asset
+# (<id>-<version>/<file>), then index.json and the icons go to GitHub Pages
+# (https://ludovic111.github.io/horizon-mods/index.json), which the launcher and
+# playhorizon.dev/mods read. Nothing is published if any entry fails its checks.
+name: publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      HORIZON_REV: ${{ vars.HORIZON_REV || 'main' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/horizon-rev
+          key: cargo-horizon-mod-${{ env.HORIZON_REV }}
+      - run: scripts/install-tool.sh
+      - run: scripts/fetch.sh .
+      - name: Build the index
+        run: |
+          mkdir -p site
+          cargo horizon-mod registry build . --files files --out site/index.json --generated "$(date -u +%FT%TZ)"
+      - name: Publish new files as releases
+        run: |
+          cargo horizon-mod registry list . | while read -r sha id version file; do
+            tag="$id-$version"
+            gh release view "$tag" >/dev/null 2>&1 && continue
+            dir="$(mktemp -d)"
+            cp "files/$sha" "$dir/$file"
+            gh release create "$tag" "$dir/$file" --title "$id $version" --latest=false \
+              --notes "Reviewed in the registry: mods/$id.toml. SHA-256 $sha."
+          done
+      - name: The site
+        run: |
+          cp -R icons site/icons
+          cat > site/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><title>Horizon mods</title>
+          <meta http-equiv="refresh" content="0; url=https://playhorizon.dev/mods">
+          <p><a href="https://playhorizon.dev/mods">playhorizon.dev/mods</a> · <a href="index.json">index.json</a></p>
+          HTML
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: pages
+        uses: actions/deploy-pages@v4

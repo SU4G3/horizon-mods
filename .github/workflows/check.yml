@@ -1,0 +1,82 @@
+# A pull request's checks: what it changes compared with main, each new file's
+# own check (its kind's, its signature, a trial run of a mod in the sandbox), and
+# the index it would publish. Runs with a read-only token and no secrets; the tool
+# comes from Horizon, never from the pull request, and a submission's code only
+# runs inside Horizon's mod sandbox.
+name: check
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      HORIZON_REV: ${{ vars.HORIZON_REV || 'main' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+      - uses: actions/checkout@v4
+        with:
+          path: head
+          persist-credentials: false
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/horizon-rev
+          key: cargo-horizon-mod-${{ env.HORIZON_REV }}
+      # main's scripts, not the pull request's.
+      - run: base/scripts/install-tool.sh
+      - name: Who submitted it
+        id: author
+        env:
+          LOGIN: ${{ github.event.pull_request.user.login }}
+          BODY: ${{ github.event.pull_request.body }}
+          BOT: ${{ vars.REGISTRY_BOT || 'horizon-mods-bot' }}
+        run: |
+          # The submission form opens pull requests as the bot and names the
+          # GitHub account that signed in to it.
+          author="$LOGIN"
+          if [ "$LOGIN" = "$BOT" ] || [ "$LOGIN" = "${BOT}[bot]" ]; then
+            author="$(printf '%s' "$BODY" | sed -n 's/.*<!-- submitted-by: \([A-Za-z0-9-]*\) -->.*/\1/p' | head -1)"
+          fi
+          echo "login=${author:-$LOGIN}" >> "$GITHUB_OUTPUT"
+      - name: What it changes
+        run: |
+          set -o pipefail
+          { echo "## Changes"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          status=0
+          cargo horizon-mod registry review base head --author "${{ steps.author.outputs.login }}" 2>&1 \
+            | tee -a "$GITHUB_STEP_SUMMARY" || status=1
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - name: Download its files
+        run: base/scripts/fetch.sh head
+      - name: Check each new file
+        run: |
+          set -o pipefail
+          { echo "## New files"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          status=0
+          cargo horizon-mod registry check base head --files files 2>&1 | tee -a "$GITHUB_STEP_SUMMARY" || status=1
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - name: The index it would publish
+        run: |
+          cargo horizon-mod registry build head --files files --out index.json --generated "$(date -u +%FT%TZ)"
+          python3 - >> "$GITHUB_STEP_SUMMARY" <<'PY'
+          import json
+          index = json.load(open("index.json"))
+          print("## index.json")
+          for p in index["projects"]:
+              print(f"- {p['kind']} `{p['id']}` {p['versions'][0]['version']}")
+          PY

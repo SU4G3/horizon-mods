@@ -1,0 +1,43 @@
+# The submission form uploads files to the `staging` prerelease as
+# <sha256>.<extension>. Once a version is published in its own release, or when
+# no open pull request lists a file any more, its staging copy goes:
+# published ones after 7 days, abandoned ones after 30.
+name: cleanup
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: read
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Delete staging files nobody needs
+        run: |
+          set -euo pipefail
+          # Hashes main lists (published), and those open pull requests add.
+          grep -ho 'sha256 = "[0-9a-f]\{64\}"' mods/*.toml | cut -d'"' -f2 | sort -u > published.txt || true
+          : > pending.txt
+          for pr in $(gh pr list --state open --json number --jq '.[].number'); do
+            gh pr diff "$pr" | grep -o '^+sha256 = "[0-9a-f]\{64\}"' | cut -d'"' -f2 >> pending.txt || true
+          done
+          now=$(date +%s)
+          gh api --paginate "repos/$GH_REPO/releases/tags/staging" --jq '.assets[] | [.id, .name, .created_at] | @tsv' |
+          while IFS=$'\t' read -r id name created; do
+            sha="${name%%.*}"
+            age=$(( (now - $(date -d "$created" +%s)) / 86400 ))
+            grep -qx "$sha" pending.txt && continue
+            if grep -qx "$sha" published.txt; then
+              [ "$age" -ge 7 ] || continue
+            else
+              [ "$age" -ge 30 ] || continue
+            fi
+            echo "Deleting $name ($age days)"
+            gh api -X DELETE "repos/$GH_REPO/releases/assets/$id"
+          done

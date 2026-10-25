@@ -1,0 +1,43 @@
+name: Report a project
+description: Something in the registry does harm, breaks the game, isn't what it says, or isn't its author's to publish.
+title: "Report: "
+labels: [report]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. Reviewers read every report. If it is dangerous (it deletes files, steals
+        accounts, spreads), say so in the first line: it can be taken down within hours, and
+        the launcher then turns installed copies off. Bugs in a mod go to its source repository.
+  - type: input
+    id: project
+    attributes:
+      label: Project id
+      description: The last part of its page's address, playhorizon.dev/mods/<id>
+      placeholder: coords_hud
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.1.0, or "all"
+  - type: dropdown
+    id: why
+    attributes:
+      label: What is wrong
+      options:
+        - It does harm (files, accounts, chat it shouldn't send, anything malicious)
+        - It isn't what its page says
+        - It breaks the game or other mods
+        - It isn't the submitter's to publish (copyright, licence, stolen)
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened
+      description: Steps, what you saw, and logs if you have them (the game's log is latest.log in its folder).
+    validations:
+      required: true

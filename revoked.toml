@@ -1,0 +1,8 @@
+# Files taken down. The launcher refuses to install them and turns installed copies off,
+# showing the reason. One file by its sha256, or every version of an id without one.
+#
+# [[revoked]]
+# id = "some_mod"
+# sha256 = "..."
+# reason = "What it did, in one sentence players will read."
+# date = "2026-10-24"

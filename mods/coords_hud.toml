@@ -1,0 +1,26 @@
+id = "coords_hud"
+kind = "mod"
+name = "Coordinates HUD"
+summary = "Your coordinates, facing and the time of day in a corner of the screen."
+description = """
+The SDK's example mod. It draws your block position, the direction you face and the time of day
+in the top-left corner, every frame.
+
+- `/where` puts your coordinates and dimension in chat.
+- `/coords` hides or shows the panel.
+
+It reads the game (position, health, time), draws on the HUD and writes to chat: nothing else.
+"""
+authors = ["Horizon"]
+owners = ["ludovic111"]
+license = "MIT"
+source = "https://github.com/ludovic111/horizon/tree/main/crates/horizon-mod-sdk/examples/coords-hud"
+icon = "icons/coords_hud.png"
+
+[[versions]]
+version = "0.1.0"
+published = "2026-10-24"
+game = "26.3"
+file = "coords_hud-0.1.0.hmod"
+sha256 = "612335e4e00d638f8b97b6c2f5c718c069c7a13811ba922557c27cb2612daf59"
+changelog = "First release: the panel, `/where` and `/coords`."
