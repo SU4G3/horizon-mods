@@ -60,6 +60,13 @@ jobs:
             | tee -a "$GITHUB_STEP_SUMMARY" || status=1
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit $status
+      # main's files, kept by publish: each download from a release counts as a
+      # player's.
+      - uses: actions/cache/restore@v4
+        with:
+          path: files
+          key: files-${{ hashFiles('head/mods/*.toml') }}
+          restore-keys: files-
       - name: Download its files
         run: base/scripts/fetch.sh head
       - name: Check each new file
