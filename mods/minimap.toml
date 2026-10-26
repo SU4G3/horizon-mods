@@ -1,0 +1,25 @@
+id = "minimap"
+kind = "mod"
+name = "Minimap"
+summary = "A map of the world around you in a corner of the screen."
+description = """
+Horizon's own minimap, formerly an extra in Options > Horizon Extras.
+
+- A map of the land around you, drawn like a map item: vanilla's map colours with their height shading and water depth, and your arrow.
+- Underground, under a roof and in the Nether it maps the floor around your height.
+- Settings: Options > Mods > Minimap > Settings (corner; size; square or round; zoom, 0.5 to 4 blocks per pixel; turn with the player).
+
+It shows a map in a corner of the screen: nothing else.
+"""
+authors = ["Horizon"]
+owners = ["ludovic111"]
+license = "MIT"
+source = "https://github.com/ludovic111/horizon/tree/main/mods/official/minimap"
+
+[[versions]]
+version = "1.0.0"
+published = "2026-10-26"
+game = "26.3"
+file = "minimap-1.0.0.hmod"
+sha256 = "2906eb2832f4e64075be2aa55da0829f40b2eccf26727951dd19d7607e9fe704"
+changelog = "First release: the minimap extra as a mod, same look and options."
