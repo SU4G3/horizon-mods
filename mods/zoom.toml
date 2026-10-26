@@ -1,0 +1,26 @@
+id = "zoom"
+kind = "mod"
+name = "Zoom"
+summary = "Hold a key to zoom in; the mouse wheel zooms further while you hold it."
+description = """
+Horizon's own zoom, formerly an extra in Options > Horizon Extras.
+
+- Hold the key (Z by default) to zoom in at the starting zoom; let go and the view comes back.
+- While you hold it, the mouse wheel zooms further in or out (up to 10x) and the hotbar stays put.
+- Smooth zoom eases in and out like the spyglass; slower turning keeps aiming steady.
+- Settings: Options > Mods > Zoom > Settings (the key; starting zoom; smooth zoom; slower turning).
+
+It hears its own key and the mouse wheel while you hold it, and zooms the camera: nothing else.
+"""
+authors = ["Horizon"]
+owners = ["ludovic111"]
+license = "MIT"
+source = "https://github.com/ludovic111/horizon/tree/main/mods/official/zoom"
+
+[[versions]]
+version = "1.0.0"
+published = "2026-10-26"
+game = "26.3"
+file = "zoom-1.0.0.hmod"
+sha256 = "447f7cc49b4e8535c8252a871ac6fbdafcc7bfcf881297429dc93f185b2f9340"
+changelog = "First release: the zoom extra as a mod, same look and options."
