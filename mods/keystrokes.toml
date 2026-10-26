@@ -1,0 +1,25 @@
+id = "keystrokes"
+kind = "mod"
+name = "Keystrokes"
+summary = "Your movement keys, mouse buttons and space bar in a corner, lit while held, with clicks per second."
+description = """
+Horizon's own keystrokes overlay, formerly an extra in Options > Horizon Extras.
+
+- Forward, left, back and right as you bound them, the two mouse buttons and the space bar, lit while held.
+- Clicks per second under each mouse button (can be turned off).
+- Settings: Options > Mods > Keystrokes > Settings (corner; clicks per second).
+
+It reads which keys you hold and your clicks, and draws on the HUD: nothing else.
+"""
+authors = ["Horizon"]
+owners = ["ludovic111"]
+license = "MIT"
+source = "https://github.com/ludovic111/horizon/tree/main/mods/official/keystrokes"
+
+[[versions]]
+version = "1.0.0"
+published = "2026-10-26"
+game = "26.3"
+file = "keystrokes-1.0.0.hmod"
+sha256 = "fc7ab8fffba4d9df9da2b5aa84dd9ed33be4712fe65a0b518094f5feb64966d4"
+changelog = "First release: the keystrokes extra as a mod, same look and options."
