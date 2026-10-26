@@ -1,0 +1,25 @@
+id = "fps_overlay"
+kind = "mod"
+name = "FPS Counter"
+summary = "Frames per second in a corner of the screen, with the minimum and the 1% low."
+description = """
+Horizon's own FPS counter, formerly an extra in Options > Horizon Extras.
+
+- Frames in the last second, in a small box in the corner you pick.
+- Optionally the slowest frame and the 1% low of the last 5 seconds.
+- Settings: Options > Mods > FPS Counter > Settings (corner; minimum and 1% low).
+
+It reads the game's own frame counter and draws on the HUD: nothing else.
+"""
+authors = ["Horizon"]
+owners = ["ludovic111"]
+license = "MIT"
+source = "https://github.com/ludovic111/horizon/tree/main/mods/official/fps-overlay"
+
+[[versions]]
+version = "1.0.0"
+published = "2026-10-26"
+game = "26.3"
+file = "fps_overlay-1.0.0.hmod"
+sha256 = "46109c3da01c058c0c15a9e43206b749627e69cd5cd023167621bb5dbdb88bcb"
+changelog = "First release: the FPS counter extra as a mod, same look and options."
