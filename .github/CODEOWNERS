@@ -1,6 +1,7 @@
 # Every change needs a review from one of these before it merges (branch protection:
-# "Require review from Code Owners"). Add trusted contributors to the first line (Ludovic decides who:
-# rdbtCVS; kacpherek and levzzz5154 since 2026-10-27). /.github/ and takedowns stay Ludovic's.
-*            @ludovic111 @rdbtCVS @kacpherek @Online5277
+# "Require review from Code Owners"). The reviewers are the GitHub team horizon-rust/mod-reviewers (inside the
+# Horizon Team; Ludovic decides who is in it: kacpherek, levzzz5154, Online5277, rdbtCVS on 2026-10-28).
+# /.github/ and takedowns stay Ludovic's.
+*            @ludovic111 @horizon-rust/mod-reviewers
 /.github/    @ludovic111
 /revoked.toml @ludovic111
