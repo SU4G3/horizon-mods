@@ -1,0 +1,26 @@
+id = "blockscope"
+kind = "mod"
+name = "Blockscope"
+summary = "The block under your crosshair: its name, id and distance, in a box beside the crosshair."
+description = """
+Jade-style block info for Horizon: the block under your crosshair, its name in your language, its block id and how far it is, in a small box beside the crosshair.
+
+- Nothing is drawn when you look at no block, while a screen is open, or with the HUD hidden (F1).
+- Reaches 20 blocks and flips to the left near the screen's right edge.
+
+It reads the player and one crosshair raycast, draws on the HUD, and reads the item table for block names. No chat, no storage, no commands.
+
+Hardness, the right tool, block states and entities are out of reach in mod API 0.1: they need the future `world-read` and crosshair `target` interfaces."""
+authors = ["Domanffe"]
+owners = ["Domanffe"]
+license = "MIT"
+source = "https://github.com/Domanffe/blockscope"
+icon = "https://raw.githubusercontent.com/Domanffe/blockscope/main/docs/icon.png"
+
+[[versions]]
+version = "0.1.0"
+published = "2026-10-27"
+game = "26.3"
+file = "blockscope-0.1.0.hmod"
+sha256 = "8c9de32150bc845c6e1d1d28a28d6f1746cea8c124aa7e683acdd597c1b49325"
+changelog = "First release: the block under the crosshair, its name, id and distance, in a box beside the crosshair."
