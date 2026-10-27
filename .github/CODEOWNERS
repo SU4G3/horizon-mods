@@ -1,6 +1,6 @@
 # Every change needs a review from one of these before it merges (branch protection:
 # "Require review from Code Owners"). Add trusted contributors to the first line (Ludovic decides who:
 # rdbtCVS; kacpherek and levzzz5154 since 2026-10-27). /.github/ and takedowns stay Ludovic's.
-*            @ludovic111 @rdbtCVS @kacpherek @levzzz5154
+*            @ludovic111 @rdbtCVS @kacpherek @Online5277
 /.github/    @ludovic111
 /revoked.toml @ludovic111
