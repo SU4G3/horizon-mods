@@ -7,7 +7,8 @@
     python3 tools/native.py proof --resources PATH   # build, then drive the game with horizon-ctl
     --horizon REV   build on another Horizon commit (`latest` = the newest Nightly) instead of
                     compatibility.json's: the mod uses only the native hook points, so it builds
-                    on any Horizon whose NATIVE_HOOKS_API is the one it names, as the launcher does.
+                    on any Horizon whose NATIVE_HOOKS_API is at least the one it names, as the
+                    launcher does.
 
 Horizon's source comes from GitHub's archive of the commit, never a local checkout; horizon-mixins is
 built once at the pinned commit. Everything goes under target/.
@@ -109,7 +110,8 @@ def stage(revision):
     """The mod applied on Horizon `revision`: target/stage/ (cargo's incremental state survives)."""
     tree = source(revision)
     api = hooks_api(tree)
-    if api != COMPAT["hooks"]:
+    # Hook points are only ever added: any later version has the ones this mod hooks.
+    if api is None or api < COMPAT["hooks"]:
         sys.exit(f"Horizon {revision[:7]} has native hook points v{api}, this mod needs v{COMPAT['hooks']}.")
     # As the launcher does for a mod on the hook points: pin the copy to the commit it builds on.
     mods = TARGET / "mods"
