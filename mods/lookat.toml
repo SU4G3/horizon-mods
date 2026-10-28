@@ -1,0 +1,31 @@
+id = "lookat"
+kind = "mod"
+name = "LookAt"
+summary = "The block under your crosshair as a vanilla tooltip: its icon, its name in your language and where it comes from. Reach up to 1024 blocks"
+description = """
+The block under your crosshair at the top of the screen, drawn as a vanilla tooltip: its item's icon, its name in your language and the namespace it comes from.
+
+**Settings** (Options → Mods → LookAt):
+
+- **Range**: Reach (5 blocks), 16, 64 or 1024 blocks, across distant terrain
+- **Position**: Top, Top left, Top right
+- **Background opacity**: 100%, 75%, 50%, 25%
+- **Item icon**, **Where it comes from**: on or off
+- **Position and distance**: the block's coordinates and how far it is
+
+To make the box bigger, raise the game's GUI Scale.
+
+**Blocks only for now**: the mod API can't see entities yet, so mobs show nothing."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/lookat"
+icon = "https://raw.githubusercontent.com/d3grando/lookat/main/icon.png"
+
+[[versions]]
+version = "0.1.0"
+published = "2026-10-28"
+game = "26.3"
+file = "lookat-0.1.0.hmod"
+sha256 = "f3da841f96ffc4d43a636c4aa6503907281ed36cd8711c498447ef5402943970"
+changelog = "First release."
