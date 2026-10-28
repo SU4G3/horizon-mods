@@ -1,0 +1,49 @@
+# Zoom (Horizon native mod)
+
+Horizon's official Zoom: hold a key (Z by default) to zoom in, and turn the mouse wheel while you hold it to zoom
+further in or out. Its settings page (Options > Mods > Zoom > Settings) has the key and three options: the
+starting zoom (2x to 10x), smooth zoom (eased like the spyglass) and slower turning while zoomed.
+
+It is a [horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundle (`mixins/zoom/`) that the Horizon
+launcher builds into the game. It replaces the WebAssembly Zoom 1.x and keeps its settings: the same files
+(`horizon-mods/.horizon-mod-data/zoom/level`, `smooth`, `sensitivity`) and the same key line
+(`key.zoom.zoom:…` in `horizon-mods.txt`).
+
+## Install
+
+In the Horizon launcher: Mods → Zoom → Install, then Settings → Game → Native mods (experimental) → Build. The
+launcher downloads its own Rust and builds the game with your native mods; see Horizon's
+[native mods](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md).
+
+## Made on the hook points
+
+The bundle hooks only Horizon's native hook points (`crates/horizon-client/src/game/native_hooks.rs`), which keep
+their names and signatures across releases. `compatibility.json` names their version (`"hooks": 1`), so the
+launcher builds Zoom on any Horizon with that version, the player's own game by default, together with any other
+mod. `horizon_revision` is only the commit it was last tested on.
+
+| File | What it is |
+|---|---|
+| `mixins/zoom/horizon-mixin.toml` | The bundle: one module and the HEAD hooks |
+| `mixins/zoom/runtime.rs` | The mod's logic and state, added to the game as `game::official_zoom`; also this crate's library, for its tests |
+| `mixins/zoom/*.rs` | One small helper per hook |
+| `tools/native.py` | Apply on Horizon (from GitHub, by commit), check, build, package the `.hnmod`, run the proof |
+| `tools/proof.py`, `tools/game.py` | The proof: the built game driven with `horizon-ctl --offscreen` on fresh, temporary data |
+
+## Build and prove
+
+```sh
+cargo test                                         # the logic
+python3 tools/native.py check                      # apply on the tested Horizon and cargo check the game
+python3 tools/native.py check --horizon latest     # ... on the newest Nightly
+python3 tools/native.py package                    # target/zoom-<version>.hnmod for the registry
+python3 tools/native.py proof --resources /path/to/.local/horizon-client/26.3
+```
+
+The proof needs resources prepared from your own Minecraft 26.3 (`horizon-prepare`); none are in this repository.
+It seeds the WebAssembly Zoom's settings (8x, no smoothing, key C) in a temporary game folder, then checks that
+Options > Mods shows them, that Z does nothing and C zooms, that the wheel zooms instead of moving the hotbar
+while C is held, and that the page's buttons write the same files. CI runs `cargo test`, packages the `.hnmod`
+and checks the game on the tested commit, and every Monday on the newest Nightly.
+
+License: MIT.

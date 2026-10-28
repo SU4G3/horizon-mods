@@ -1,0 +1,53 @@
+name: CI
+on:
+  push:
+  pull_request:
+  # Every Monday: the mod on the newest Nightly, to catch a change of the hook points early.
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      horizon:
+        description: "Horizon commit, tag, or `latest` (the newest Nightly)"
+        default: latest
+permissions:
+  contents: read
+env:
+  # The Rust the launcher builds native mods with (launcher/src/rust_toolchain.rs).
+  RUST: "1.99.1"
+jobs:
+  mod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install $RUST --profile minimal --component rustfmt --component clippy && rustup default $RUST
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets --locked -- -D warnings
+      - run: cargo test --locked
+      - name: Package the .hnmod and check what it holds
+        run: |
+          python3 tools/native.py package
+          python3 - <<'PY'
+          import json, zipfile, glob
+          path, = glob.glob("target/*.hnmod")
+          names = zipfile.ZipFile(path).namelist()
+          manifest = json.loads(zipfile.ZipFile(path).read("horizon-native.json"))
+          assert manifest["hooks"] == 1, manifest
+          assert all(n == "horizon-native.json" or (n.startswith(f"mixins/{manifest['id']}/") and n.endswith((".rs", ".toml"))) for n in names), names
+          print(path, manifest)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hnmod
+          path: target/*.hnmod
+  horizon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install $RUST --profile minimal && rustup default $RUST
+      - run: sudo apt-get update && sudo apt-get install -y libasound2-dev libudev-dev pkg-config
+      - name: Apply on Horizon and check the game
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          HORIZON: ${{ github.event_name == 'schedule' && 'latest' || inputs.horizon || '' }}
+        run: python3 tools/native.py check ${HORIZON:+--horizon "$HORIZON"}
