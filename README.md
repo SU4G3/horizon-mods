@@ -14,8 +14,8 @@ launcher downloads its own Rust and builds the game with your native mods; see H
 ## Made on the hook points
 
 The bundle hooks only Horizon's native hook points (`crates/horizon-client/src/game/native_hooks.rs`), which keep
-their names and signatures across releases. `compatibility.json` names their version (`"hooks": 1`), so the
-launcher builds FPS Counter on any Horizon with that version, the player's own game by default, together with any other
+their names and signatures across releases. `compatibility.json` names the version it needs (`"hooks": 1`), so the
+launcher builds FPS Counter on any Horizon with that version or a later one, the player's own game by default, together with any other
 mod. `horizon_revision` is only the commit it was last tested on.
 
 | File | What it is |
