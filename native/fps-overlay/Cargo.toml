@@ -1,0 +1,11 @@
+[package]
+name = "horizon-mod-fps-overlay"
+version = "2.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Horizon's official FPS counter, a native mod: frames per second in a corner of the screen."
+
+# The mod's logic and its tests: the same file the bundle adds to the game.
+[lib]
+path = "mixins/fps_overlay/runtime.rs"

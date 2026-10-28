@@ -64,6 +64,9 @@ why.
 | `.github/workflows/check.yml` | A pull request's checks |
 | `.github/workflows/publish.yml` | On merge: releases, then `index.json` on Pages |
 | `.github/workflows/cleanup.yml` | Weekly: staging files nobody needs any more |
+| `.github/workflows/native.yml` | Horizon's native mods: each changed one's tests, `.hnmod` and game check, all of them together, and weekly on the newest Nightly |
+| `native/<name>/` | Horizon's own native mods (Zoom, FPS Counter, Keystrokes, Minimap): the source of their `.hnmod` files |
+| `native/tools/` | Shared by them: apply on Horizon, check, build, package, prove (`native/tools/native.py`) |
 | `scripts/` | What the workflows share |
 
 The format of the entries and of `index.json` is
@@ -72,3 +75,20 @@ the checks are `cargo horizon-mod check` and `cargo horizon-mod registry`, from 
 repository variable `HORIZON_REV` (else `main`).
 
 The index: `https://horizon-rust.github.io/horizon-mods/index.json`.
+
+## Horizon's native mods
+
+`native/<name>/` holds the source of Horizon's official mods, as
+[horizon-mixins](https://github.com/horizon-rust/horizon-mixins) bundles on Horizon's native hook points
+([docs/native-mods.md](https://github.com/horizon-rust/horizon/blob/main/docs/native-mods.md)). Each folder keeps the
+history of the repository it came from. A mod builds on any Horizon whose hook points are at least the version its
+`compatibility.json` names; `horizon_revision` is the commit it was last tested on.
+
+```sh
+python3 native/tools/native.py check zoom          # apply on the tested Horizon and cargo check the game
+python3 native/tools/native.py check all           # every native mod together
+python3 native/tools/native.py package all         # native/target/<id>-<version>.hnmod, for a registry entry
+python3 native/tools/native.py proof zoom --resources /path/to/.local/horizon-client/26.3
+```
+
+To make your own, start from [horizon-native-mod-template](https://github.com/horizon-rust/horizon-native-mod-template).
