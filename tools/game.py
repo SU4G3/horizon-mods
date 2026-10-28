@@ -46,11 +46,13 @@ class Game:
 
     def play(self):
         """Back to the world from any screen."""
-        for _ in range(4):
+        for _ in range(6):
             if self.run("status").get("screen") == "playing":
                 return
             self.run("key", "esc", "tap")
-            time.sleep(0.3)
+            time.sleep(0.5)
+        if self.run("status").get("screen") == "playing":
+            return
         raise AssertionError(f"not back in the world: {self.run('status').get('screen')}")
 
     def labels(self):
