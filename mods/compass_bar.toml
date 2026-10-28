@@ -1,0 +1,39 @@
+id = "compass_bar"
+kind = "mod"
+name = "Compass Enhanced"
+summary = "A compass bar with degrees and colored directions, plus death points that guide you back."
+description = """
+A compass bar at the top of your screen that shows where you are facing, in degrees, and slides smoothly as you turn.
+
+## Features
+- Compass letters (N, NE, E, SE, S, SW, W, NW) in a color you choose
+- Death points: every time you die, a marker stays on the bar with the distance to where you died
+- Reaching a death point turns it into an X with a countdown, or look at it and press X to dismiss it
+- Arrows with the distance at the edge of the bar for death points out of view
+- Optional background box and four sizes (75% to 150%)
+- No commands
+
+Settings are in Options → Mods → Compass Bar. Death points are not saved: they vanish when you close the game."""
+authors = ["Isaac"]
+owners = ["Fernandes585"]
+license = "MIT"
+source = "https://github.com/Fernandes585/Compass-Enhanced"
+key = "RWScU5xtTnTnu55tXSTPbhM2BQ6KG2FLeMD9aTeX111NlQPh7cCafm1w"
+
+[[versions]]
+version = "0.1.0"
+published = "2026-10-28"
+game = "26.3"
+file = "compass_bar-0.1.0.hmod"
+sha256 = "bb8f191f89f5ea963301fd2d28315b251dfb8df9656b640975eddffaec3e6b00"
+signature = """
+untrusted comment: signature from minisign secret key\r
+RUScU5xtTnTnuz0T7EECJHdaPC5PHAOud+04Uwen4mw75K38TKOCnK9eCKn44pX113qFMvkrP+P4CwF9FJBFX5qws5BedBPbpA0=\r
+trusted comment: timestamp:1793221575\tfile:target/horizon-mod/compass_bar.hmod\thashed\r
+DedLxzyaxaXaNO8y8pICM4Th3nL0N4oxamDGm0eoQb+6UDBj6pLXbtQLxqnMrbDQYmCE2gX6PGS86G1C33GGDg=="""
+changelog = """
+First release.
+
+- Compass bar with degrees and compass letters (N, NE, E, SE, S, SW, W, NW)
+- Death points with distance, arrival countdown and a key to dismiss them (X by default)
+- Settings: bar on/off, background, scale, letter color, arrival distance, X time and death points kept"""
