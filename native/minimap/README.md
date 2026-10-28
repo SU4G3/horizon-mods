@@ -23,17 +23,18 @@ mod. `horizon_revision` is only the commit it was last tested on.
 | `mixins/minimap/horizon-mixin.toml` | The bundle: one module and the HEAD hooks |
 | `mixins/minimap/runtime.rs` | The mod's logic and state, added to the game as `game::official_minimap`; also this crate's library, for its tests |
 | `mixins/minimap/*.rs` | One small helper per hook |
-| `tools/native.py` | Apply on Horizon (from GitHub, by commit), check, build, package the `.hnmod`, run the proof |
-| `tools/proof.py`, `tools/game.py` | The proof: the built game driven with `horizon-ctl --offscreen` on fresh, temporary data |
+| `../tools/native.py` | Shared by the native mods: apply on Horizon (from GitHub, by commit), check, build, package the `.hnmod`, run the proof |
+| `proof.py` (with `../tools/game.py`) | The proof: the built game driven with `horizon-ctl --offscreen` on fresh, temporary data |
 
 ## Build and prove
 
 ```sh
-cargo test                                         # the logic
-python3 tools/native.py check                      # apply on the tested Horizon and cargo check the game
-python3 tools/native.py check --horizon latest     # ... on the newest Nightly
-python3 tools/native.py package                    # target/minimap-<version>.hnmod for the registry
-python3 tools/native.py proof --resources /path/to/.local/horizon-client/26.3
+(cd native/minimap && cargo test)                    # the logic
+python3 native/tools/native.py check minimap       # apply on the tested Horizon and cargo check the game
+python3 native/tools/native.py check minimap --horizon latest  # ... on the newest Nightly
+python3 native/tools/native.py check all           # with the other native mods, as a player's set
+python3 native/tools/native.py package minimap     # native/target/minimap-<version>.hnmod for the registry
+python3 native/tools/native.py proof minimap --resources /path/to/.local/horizon-client/26.3
 ```
 
 The proof needs resources prepared from your own Minecraft 26.3 (`horizon-prepare`); none are in this repository.
