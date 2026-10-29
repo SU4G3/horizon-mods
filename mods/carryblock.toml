@@ -1,0 +1,28 @@
+id = "carryblock"
+kind = "native-mod"
+name = "Carry Block"
+summary = "Sneak and right-click with an empty hand to pick up a chest (with its items) or a small mob, carry it and put it down."
+description = """
+**A native Horizon mod**: the launcher builds it into the game (Settings → Game → Native mods, then Build). Native mods are not sandboxed and run with your account's rights, so read the source before you build it. Pinned to Horizon 142388e and horizon-mixins 0d6b103.
+
+Sneak and right-click with an empty hand to pick up a block with its contents (chests, furnaces, barrels...) or a small, friendly mob, and carry it; right-click to put it down where you want, with everything it held.
+
+- Slowness while carrying; a small HUD box shows the load.
+- Never an item: nothing to duplicate. On death the load is put down nearby, or dropped as its item with its contents.
+- Follows the game's rules: spawn protection, world border, reach, adventure mode, game master blocks; no pick-up of a container someone has open, a mob being traded with, a monster, a boss or another player's pet. Spawners and similar are denied by default.
+- Deny lists, survival/creative rules and slowness are settings (Options → Mods → Carry Block).
+
+Inspired by [Carry On](https://modrinth.com/mod/carry-on); not affiliated, no code from it."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/carryblock"
+icon = "https://raw.githubusercontent.com/d3grando/carryblock/main/icon.png"
+
+[[versions]]
+version = "0.1.2"
+published = "2026-10-29"
+game = "26.3"
+file = "carryblock-0.1.2.hnmod"
+sha256 = "9a6ebd26f640a477815862eb36846fe3289046d0f4c06ef3a815f463ca9a3701"
+changelog = "First release."
