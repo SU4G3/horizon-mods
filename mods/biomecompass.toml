@@ -1,0 +1,27 @@
+id = "biomecompass"
+kind = "native-mod"
+name = "BiomeCompass"
+summary = "Craft a Biome Compass, pick a biome and its needle points to the nearest one."
+description = """
+**A native Horizon mod**: the launcher builds it into the game (Settings → Game → Native mods, then Build). Native mods are not sandboxed and run with your account's rights, so read the source before you build it. Pinned to Horizon 142388e and horizon-mixins 0d6b103.
+
+Craft a **Biome Compass** (a compass with a sapling on each of its four sides, any kinds), right-click it and pick a biome from the list (with a search box). The world generator is searched around you, a little every tick, and the compass's needle then points to the nearest one, with its distance and direction on the action bar.
+
+- Works in single player, on LAN and on a server running the native build, for vanilla clients too (the picker is a vanilla dialog).
+- `/biomecompass find|list|status|stop|tp` as well; a small HUD box is optional.
+- Settings: search radius, sample spacing, per-tick budget, HUD.
+
+Inspired by [Nature's Compass](https://modrinth.com/mod/natures-compass); not affiliated, no code from it."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/biomecompass"
+icon = "https://raw.githubusercontent.com/d3grando/biomecompass/main/icon.png"
+
+[[versions]]
+version = "0.2.2"
+published = "2026-10-29"
+game = "26.3"
+file = "biomecompass-0.2.2.hnmod"
+sha256 = "d9a4aedcf22318774e1ac6bed6f1e00aca13a38c8dc3426d5a7800e4d8c61bf5"
+changelog = "First release."
