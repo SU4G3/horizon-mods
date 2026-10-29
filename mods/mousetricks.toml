@@ -1,0 +1,26 @@
+id = "mousetricks"
+kind = "native-mod"
+name = "Mouse Tricks"
+summary = "Inventory mouse tricks: drag to spread or gather, the wheel moves items one by one, and R sorts."
+description = """
+**A native Horizon mod**: the launcher builds it into the game (Settings → Game → Native mods, then Build). Native mods are not sandboxed and run with your account's rights, so read the source before you build it. Pinned to Horizon 142388e and horizon-mixins 0d6b103.
+
+- **Right-drag**: one item into each slot you pass.
+- **Left-drag**: gather the same items; with Shift, quick-move many stacks.
+- **Mouse wheel** over a slot: move items one at a time between your inventory and a container.
+- **Sort** (R, or middle click on an empty spot): merges partial stacks and sorts the part under the mouse (a chest, or your main inventory; the hotbar only if you ask). Creative-tab order, by name or by count. Items with other names, enchantments or damage never merge; bundles stay put.
+
+Everything goes through the game's own container clicks, so servers accept it. Each trick is a setting (Options → Mods → Mouse Tricks). Inspired by [Mouse Tweaks](https://modrinth.com/mod/mouse-tweaks); not affiliated, no code from it."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/mousetricks"
+icon = "https://raw.githubusercontent.com/d3grando/mousetricks/main/icon.png"
+
+[[versions]]
+version = "0.2.0"
+published = "2026-10-29"
+game = "26.3"
+file = "mousetricks-0.2.0.hnmod"
+sha256 = "48c60955371963f8e320a9efbe8285bb276d255c29178a8a021e7e2b47535cbe"
+changelog = "First release."
