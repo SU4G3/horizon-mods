@@ -1,0 +1,26 @@
+id = "enchantmenthints"
+kind = "native-mod"
+name = "Enchantment Hints"
+summary = "A short description under every enchantment in item tooltips, in English and Russian."
+description = """
+**A native Horizon mod**: the launcher builds it into the game (Settings → Game → Native mods, then Build). Native mods are not sandboxed and run with your account's rights, so read the source before you build it. Pinned to Horizon 142388e and horizon-mixins 0d6b103.
+
+Every enchantment on books and gear gets a one-line description in its tooltip: what it does, in plain words. Our own text for every 26.3 enchantment, in English and Russian.
+
+- Always, or only while Shift is held (with a reminder line).
+- Colour and line width are settings.
+
+Settings: Options → Mods → Enchantment Hints. Inspired by [Enchantment Descriptions](https://modrinth.com/mod/enchantment-descriptions); not affiliated, no code or text from it."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/enchantmenthints"
+icon = "https://raw.githubusercontent.com/d3grando/enchantmenthints/main/icon.png"
+
+[[versions]]
+version = "0.1.0"
+published = "2026-10-29"
+game = "26.3"
+file = "enchantmenthints-0.1.0.hnmod"
+sha256 = "6f1b80a7c22e02b086d5eea2ed6f7c5481b3e40d6a974bf9e382a3df4a2de9df"
+changelog = "First release."
