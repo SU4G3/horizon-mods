@@ -1,0 +1,27 @@
+id = "smartf3"
+kind = "native-mod"
+name = "SmartF3"
+summary = "A tidier, configurable F3 debug screen: the same information in modules you can colour, reorder and turn off."
+description = """
+**A native Horizon mod**: the launcher builds it into the game (Settings → Game → Native mods, then Build). Native mods are not sandboxed and run with your account's rights, so read the source before you build it. Pinned to Horizon 142388e and horizon-mixins 0d6b103.
+
+The F3 debug screen, grouped into 14 modules: FPS, server, coordinates, chunk, facing, world, biome, light, chart keys, system, rendering, and the targeted block, fluid and entity.
+
+- Each module: on/off, label and value colours, left or right column, order.
+- Text shadow, background (vanilla, dark, none), gap between modules, compact layout.
+- The vanilla F3 is one click (or `/smartf3 off`) away; the F3 charts and keys work as in vanilla.
+
+Settings: Options → Mods → SmartF3. Inspired by [BetterF3](https://modrinth.com/mod/betterf3); not affiliated, no code from it."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/smartf3"
+icon = "https://raw.githubusercontent.com/d3grando/smartf3/main/icon.png"
+
+[[versions]]
+version = "0.1.0"
+published = "2026-10-29"
+game = "26.3"
+file = "smartf3-0.1.0.hnmod"
+sha256 = "666fc77a12411c8b525dca3d3d478595e760b73c48b62b936fb6026419547929"
+changelog = "First release."
