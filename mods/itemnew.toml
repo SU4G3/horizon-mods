@@ -1,0 +1,26 @@
+id = "itemnew"
+kind = "native-mod"
+name = "Item New"
+summary = "Newly picked-up items glow in your hotbar and inventory until you look at them."
+description = """
+**A native Horizon mod**: the launcher builds it into the game (Settings → Game → Native mods, then Build). Native mods are not sandboxed and run with your account's rights, so read the source before you build it. Pinned to Horizon 142388e and horizon-mixins 0d6b103.
+
+Items you just got (picked up, crafted, taken from a chest, given) get a soft glow in the hotbar and in inventory and container screens, until you point at them or close the screen.
+
+- Styles: glow, glow with a star, by rarity colour.
+- Which screens, and when a mark clears, are settings; `/itemnew` shows or clears the marks.
+
+Settings: Options → Mods → Item New. Inspired by [Item Highlighter](https://modrinth.com/mod/item-highlighter); not affiliated, no code from it."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/itemnew"
+icon = "https://raw.githubusercontent.com/d3grando/itemnew/main/icon.png"
+
+[[versions]]
+version = "0.1.1"
+published = "2026-10-29"
+game = "26.3"
+file = "itemnew-0.1.1.hnmod"
+sha256 = "cdc68c9911736703ebc4b8b81895a719edd74ba9d08fe01ddb34fe09b8d490e9"
+changelog = "First release."
