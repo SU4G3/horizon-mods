@@ -1,0 +1,27 @@
+id = "treefall"
+kind = "native-mod"
+name = "TreeFall"
+summary = "Cut one log of a natural tree with an axe and the whole tree comes down."
+description = """
+**A native Horizon mod** (built into the game by the launcher; native mods are not sandboxed, so read the source before you build it).
+
+Cut one log of a natural tree with an axe and the whole tree comes down. Every log is broken through the game's ordinary mining path, so drops, statistics, hunger and axe wear are exactly as if you had chopped each log yourself.
+
+- Sneak to cut a single log; log cabins (logs without natural leaves) are never felled.
+- **Settings page** (Options > Mods > TreeFall): which tools fell (axe / any tool / anything), sneaking, largest tree, leaves needed, cut time (as one log, or longer for bigger trees), tool wear (every log / once / a factor / none), keep durability, hunger, drops at the stump, replant a sapling, break the leaves, huge mushrooms.
+- `/treefall` on/off per player; LAN guests too.
+
+In the spirit of FallingTree; not affiliated, no code from it. Pinned to Horizon 142388e and horizon-mixins 0d6b103."""
+authors = ["d3grando"]
+owners = ["d3grando"]
+license = "MIT"
+source = "https://github.com/d3grando/treefall"
+icon = "https://raw.githubusercontent.com/d3grando/treefall/main/icon.png"
+
+[[versions]]
+version = "0.3.0"
+published = "2026-10-29"
+game = "26.3"
+file = "treefall-0.3.0.hnmod"
+sha256 = "6f7feea8d0f55291953476b272f00cfc4be42d64972e7efefeb3df47c9dae8ce"
+changelog = "First registry release. A settings page in Options > Mods; the cut can take longer for bigger trees (and letting go cancels it, in single player too); trees come down from the top and leave a stump when the axe would wear out; replanting, drops at the stump, leaves and huge mushrooms are options."
